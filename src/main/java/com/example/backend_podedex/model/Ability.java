@@ -13,35 +13,18 @@ public class Ability {
     @Id
     @Column(name = "ability_id")
     public int abilityId;
-
     @Column(name = "ability")
     public String ability;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "abilities")
-    public List<Pokemon> abilities;
-
     public int getAbilityId() {
         return abilityId;
     }
-
     public void setAbilityId(int abilityId) {
         this.abilityId = abilityId;
     }
-
     public String getAbility() {
         return ability;
     }
-
     public void setAbility(String ability) {
         this.ability = ability;
-    }
-
-   public List<Pokemon> getAbilities() {
-        return abilities;
-    }
-
-    public void setAbilities(List<Pokemon> abilities) {
-        this.abilities = abilities;
     }
 }

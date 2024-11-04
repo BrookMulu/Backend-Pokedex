@@ -21,6 +21,10 @@ public class PokemonService {
     public PokemonService(PokemonRepository pokemonRepository) {
         this.pokemonRepository = pokemonRepository;
     }
+
+    public Page<Pokemon> filterPokemon(String name, Integer height, Integer weight, String genus, String type, String ability, String eggGroup, Pageable pageable) {
+        return pokemonRepository.filterPokemon(name, height, weight, genus, type, ability, eggGroup, pageable );
+    }
     public Page<Pokemon> getAllPokemon(Pageable pageable){
         return  pokemonRepository.findAll(pageable);
     }
@@ -34,4 +38,6 @@ public class PokemonService {
     public List<Pokemon> findByWeight(int weight){return pokemonRepository.findByWeight(weight); }
     public List<Pokemon> findByGenus(String genus){return pokemonRepository.findByGenus(genus); }
     public List<Pokemon> findByType(String type) {return pokemonRepository.findByType(type); }
+    public List<Pokemon> findByAbility(String ability) {return pokemonRepository.findByAbility(ability); }
+    public List<Pokemon> findByEggGroup(String eggGroup) {return pokemonRepository.findByEggGroup(eggGroup); }
 }

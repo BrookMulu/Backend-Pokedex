@@ -13,32 +13,17 @@ public class Type {
     public int type_id;
     @Column(name = "type")
     public String type;
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "types")
-//    public List<Pokemon> pokemons;
-
-
     public int getType_id() {
         return type_id;
     }
-
     public void setType_id(int type_id) {
         this.type_id = type_id;
     }
-
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
 
-//    public List<Pokemon> getPokemons() {
-//        return pokemons;
-//    }
-//
-//    public void setPokemons(List<Pokemon> pokemons) {
-//        this.pokemons = pokemons;
-//    }
 }
