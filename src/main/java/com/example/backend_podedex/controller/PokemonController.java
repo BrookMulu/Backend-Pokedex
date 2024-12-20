@@ -1,7 +1,6 @@
 package com.example.backend_podedex.controller;
 
 import com.example.backend_podedex.model.Pokemon;
-import com.example.backend_podedex.model.Type;
 import com.example.backend_podedex.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,22 +9,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/api/pokemon")
-@CrossOrigin(origins = "http://localhost:3000/pokemons")
 public class PokemonController {
     public final PokemonService pokemonService;
     @Autowired
     public PokemonController(PokemonService pokemonService){
         this.pokemonService = pokemonService;
     }
-
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all")
     public ResponseEntity<Page<Pokemon>> getAllPokemon(@RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "10")int size){
         Page<Pokemon> pokemons = pokemonService.getAllPokemon(PageRequest.of(page,size));
@@ -54,6 +50,8 @@ public class PokemonController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
+    //Test api's
     @GetMapping("/findByID/{id}")
     public ResponseEntity<List<Pokemon>> getByID(@PathVariable int id){
         try {
@@ -67,7 +65,7 @@ public class PokemonController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-    //@CrossOrigin(origins = "http://localhost:3000")
+
     @GetMapping("/findByName")
     public ResponseEntity<List<Pokemon>> getByName(@RequestParam(required = false) String name){
         try{

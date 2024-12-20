@@ -1,18 +1,15 @@
 package com.example.backend_podedex.service;
 
 import com.example.backend_podedex.model.Pokemon;
-import com.example.backend_podedex.model.Type;
 import com.example.backend_podedex.repository.PokemonRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import java.util.List;
 
-//@CrossOrigin
 @Service
 public class PokemonService {
     private final PokemonRepository pokemonRepository;

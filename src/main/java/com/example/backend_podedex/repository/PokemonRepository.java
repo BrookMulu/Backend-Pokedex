@@ -14,17 +14,14 @@ import java.util.List;
 @Repository
 public interface PokemonRepository extends JpaRepository<Pokemon, Integer> {
 
-    @Query("SELECT DISTINCT p FROM Pokemon p " +
-            "LEFT JOIN FETCH p.types t " +
-            "LEFT JOIN FETCH p.abilities a " +
-            "LEFT JOIN FETCH p.egg_groups e " +
+    @Query("SELECT p FROM Pokemon p " +
             "WHERE (:name IS NULL OR p.name = :name) " +
             "AND (:height IS NULL OR p.height = :height) " +
             "AND (:weight IS NULL OR p.weight = :weight) " +
             "AND (:genus IS NULL OR p.genus = :genus) " +
-            "AND (:type IS NULL OR t.type = :type) " +
-            "AND (:ability IS NULL OR a.ability = :ability) " +
-            "AND (:egg_group IS NULL OR e.egg_group = :eggGroup)")
+            "AND (:type IS NULL OR EXISTS (SELECT t FROM p.types t WHERE t.type = :type)) " +
+            "AND (:ability IS NULL OR EXISTS (SELECT a FROM p.abilities a WHERE a.ability = :ability)) " +
+            "AND (:eggGroup IS NULL OR EXISTS (SELECT e FROM p.egg_groups e WHERE e.egg_group = :eggGroup))")
     Page<Pokemon> filterPokemon(@Param("name") String name,
                                 @Param("height") Integer height,
                                 @Param("weight") Integer weight,
@@ -36,7 +33,8 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Integer> {
 
     Page<Pokemon> findAll(Pageable pageable);
     List<Pokemon> findById(int id);
-    List<Pokemon> findByName(String name);
+    @Query("SELECT p FROM Pokemon p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<Pokemon> findByName(@Param("name") String name);
     List<Pokemon> findByHeight(int height);
     List<Pokemon> findByWeight(int weight);
     List<Pokemon> findByGenus(String genus);
