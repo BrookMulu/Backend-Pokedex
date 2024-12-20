@@ -1,9 +1,6 @@
 # Start with a base image for Java
 FROM openjdk:17-jdk-slim
 
-# Add a volume for logs or other persistent data, if needed
-VOLUME /tmp
-
 # Set the working directory in the container
 WORKDIR /app
 
