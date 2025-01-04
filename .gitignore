@@ -1,5 +1,5 @@
 HELP.md
-target/
+target/*
 !target/backend_podedex-3.2.3.jar
 
 !.mvn/wrapper/maven-wrapper.jar
