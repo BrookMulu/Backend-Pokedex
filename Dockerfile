@@ -12,5 +12,5 @@ EXPOSE 8080
 
 
 # Run the application with externalized environment variables
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "app.jar"]
 
